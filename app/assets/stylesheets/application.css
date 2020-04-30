@@ -1,0 +1,68 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ header {
+    height: 64px;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .header-logo {
+    float: left;
+    padding-left: 20px;
+    color: white;
+    font-size: 22px;
+    line-height: 64px;
+  }
+
+  .header-logo a{
+    color: white;
+    font-size: 22px;
+  }
+
+  .header-menus {
+    float: right;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .header-menus li {
+    float: left;
+    line-height: 64px;
+    font-size: 13px;
+    color: white;
+    padding-left: 15px;
+  }
+
+  .header-menus a {
+    float: left;
+    font-size: 13px;
+    color: white;
+    padding-left: 20px;
+  }
+
+  .header-menus .fa {
+    padding-right: 5px;
+  }
+
+  .header-menus input[type="submit"] {
+    padding: 0 20px;
+    float: left;
+    line-height: 64px;
+    color: white;
+    margin: 0;
+    font-size: 13px;
+  }

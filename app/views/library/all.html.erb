@@ -1,0 +1,18 @@
+
+
+<div class="main library-index">
+  <div class="container">
+    <%= link_to("すべての問題を表示","/library/select") %>
+
+    <% @quizes.each do |quiz|%>
+    <div class="library-index-item">
+      <div class="question-item">
+        <%= link_to(quiz.ques_s,"/library/#{quiz.id}") %>
+      </div>
+      <div class="answer-item">
+        <%= link_to(quiz.answer,"/library/#{quiz.id}") %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="main library-new">
+  <div class="container">
+    <h1 class="form-heading">編集する</h1>
+
+    <%= form_tag("/library/#{@quiz.id}/update") do %>
+      <div class="form">
+        <div class="form-body">
+          <textarea name="ques_s"><%= @quiz.ques_s %></textarea>
+          <textarea name="answer"><%= @quiz.answer %></textarea>
+          <input type="submit" value="保存">
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

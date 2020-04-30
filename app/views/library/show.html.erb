@@ -1,0 +1,18 @@
+<div class="main library-show">
+  <div class="container">
+    <%= link_to(@quiz.list_name,"/library/index/#{@quiz.list_id}") %>
+    <div class="library-show-item">
+      <div class="library-show-question">
+        <p>
+          <%= @quiz.ques_s %>
+        </p>
+      </div>
+      <div class="library-show-answer">
+        <%= @quiz.answer %>
+      </div>
+      <div class="library-menus">
+        <%= link_to("編集", "/library/#{@quiz.id}/edit") %>
+      </div>
+    </div>
+  </div>
+</div>

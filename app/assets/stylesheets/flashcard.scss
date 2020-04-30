@@ -1,0 +1,34 @@
+// Place all the styles related to the flashcard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.select-main {
+  padding: 200px 0 100px;
+  text-align: center;
+  position: absolute;
+  tests: 0;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  color: white;
+  background-color: #64B159;
+  background-repeat: no-repeat;
+  background-position: center 50%;
+  background-size: cover;
+}
+
+.select-message {
+  position: relative;
+}
+
+.select-main h2 {
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+  margin-bottom: 20px;
+}
+
+.select-main p {
+  font-size: 24px;
+}

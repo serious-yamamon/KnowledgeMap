@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>KnowledgeMap</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+    <div class="header-logo">
+      <%= link_to("KnowledgeMap","/")  %>
+    </div>
+    <ul class="header-menus">
+      <li>
+        <%= link_to("KnowledgeMapとは","/about")  %>
+        <%= link_to("開発者ブログへ","https://blog.yamamon-so.com/")  %>
+      </li>
+    </ul>
+  </header>
+    <%= yield %>
+  </body>
+</html>
