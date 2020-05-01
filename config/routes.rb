@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'flashcard/select' => 'flashcard#select'
 
 
-
+  get 'library' => 'library#all'
   get 'library/select' => 'library#select'
   get 'library/fav' => 'library#fav'
   get 'library/check' => 'library#check'
@@ -13,6 +13,16 @@ Rails.application.routes.draw do
   get 'library/:id' => 'library#show'
   get 'library/:id/edit' => 'library#edit'
   post 'library/:id/update' => 'library#update'
+  get 'library/:id/newcom' => 'library#newcom'
+  post 'library/:id/createcom' => 'library#createcom'
+  post 'library/:q_id/:id/delcom' => 'library#delcom'
+  post 'library/:id/newimg' => 'library#newimg'
+  post 'library/:q_id/:id/delimg' => 'library#delimg'
+  get 'library/:id/newref' => 'library#newref'
+  get 'library/search' => 'library#search'
+  post 'library/:o_id/:d_id/addref' => 'library#addref'
+
+  post 'library/:o_id/:d_id/delref' => 'library#delref'
 
   get '/' => 'home#top'
   get 'about' => 'home#about'

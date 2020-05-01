@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_144914) do
+ActiveRecord::Schema.define(version: 2020_05_01_104542) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "q_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "databases", force: :cascade do |t|
     t.text "ques_s"
@@ -22,6 +29,20 @@ ActiveRecord::Schema.define(version: 2020_04_29_144914) do
     t.boolean "check"
     t.boolean "correct"
     t.boolean "incorrect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "image_name"
+    t.integer "q_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "refferences", force: :cascade do |t|
+    t.integer "o_id"
+    t.integer "d_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

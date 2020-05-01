@@ -1,0 +1,14 @@
+<div class="main comment-new">
+    <div class="comtainer">
+        <p>検索</p>
+        <%= form_tag("/library/#{@id}/newref", :method => "get") do %>
+          <textarea name="search"></textarea>
+          <input type="submit" value="検索">
+        <% end %>
+
+        <% @quizes.each do |quiz| %>
+          <%= link_to(quiz.ques_s,"/library/#{@id}/#{quiz.id}/addref",{method: "post"}) %>
+          <%= quiz.answer %>
+        <% end %>
+    </div>
+</div>

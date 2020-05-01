@@ -1,7 +1,36 @@
 <div class="main library-show">
+
   <div class="container">
-    <%= link_to(@quiz.list_name,"/library/index/#{@quiz.list_id}") %>
+    <div class="side-list">
+      <ul>
+        <div class="select-list">
+          <% @list_names.zip(@list_id) do |list_name,list_id| %>
+          <%= link_to(list_name.list_name,"/library/index/#{list_id.list_id}") %>
+          <% end %>
+          <%= link_to("お気に入り問題リスト","/library/fav") %>
+          <%= link_to("「あとで確認する」問題リスト","/library/check") %>
+          <%= link_to("誤答問題リスト","/library/incorr") %>
+          <%= link_to("未修問題リスト","/library/unlearn") %>
+      </ul>
+    </div>
+
+    <div class="prev-btn">
+      <% if params[:id] != "1" %>
+      <%= link_to("前へ","/library/#{@id.to_i - 1}") %>
+      <% else %>
+      <%= link_to("前へ","") %>
+      <% end %>
+    </div>
+
+    <div class="next-btn">
+      <%= link_to("次へ","/library/#{@id.to_i + 1}") %>
+    </div>
+
     <div class="library-show-item">
+      <div class="qustion-info">
+        <%= @quiz.list_name %>
+        <%= "第#{@quiz.q_id}問" %>
+      </div>
       <div class="library-show-question">
         <p>
           <%= @quiz.ques_s %>
@@ -13,6 +42,67 @@
       <div class="library-menus">
         <%= link_to("編集", "/library/#{@quiz.id}/edit") %>
       </div>
+    </div>
+
+    <div class="comment-item">
+      <p>コメント</p>
+      <div class="comment-new-btn">
+          <%= link_to("新規コメント", "/library/#{@quiz.id}/newcom") %>
+      </div>
+      <% @comments.each do |comment| %>
+      <div class="comment-show-item">
+        <%= comment.comment %>
+      </div>
+      <div class="comment-menus">
+          <%= link_to("削除", "/library/#{comment.q_id}/#{comment.id}/delcom", {method: "post"}) %>
+      </div>
+      <% end %>
+
+
+      <div class="img-item">
+        <p>関連画像</p>
+        <div class="img-new-btn">
+          <%= form_tag("/library/#{@quiz.id}/newimg", {multipart: true}) do %>
+            <input name="image" type="file">
+            <input type="submit" value="投稿">
+          <% end %>
+        </div>
+        <% @images.each do |image| %>
+        <div class="img-show-item">
+          <img src="<%= "/ref_images/#{image.image_name}" %>" >
+        </div>
+        <div class="img-menus">
+            <%= link_to("削除", "/library/#{image.q_id}/#{image.id}/delimg", {method: "post"}) %>
+        </div>
+        <% end %>
+      </div>
+
+
+
+      <div class="ref-item">
+        <p>関連問題</p>
+        <div class="ref-new-btn">
+          <%= link_to("関連問題追加", "/library/#{@quiz.id}/newref") %>
+        </div>
+        <% @reffers.each do |reffer| %>
+        <div class="library-show-item">
+
+          <div class="library-show-question">
+            <% refquiz = Database.find_by(id: reffer.d_id) %>
+            <%= refquiz.ques_s %>
+          </div>
+          <div class="library-show-answer">
+            <%= refquiz.answer  %>
+          </div>
+          <div class="library-menus">
+            <%= link_to("削除", "/library/#{@quiz.id}/#{refquiz.id}/delref", {method: "post"} ) %>
+          </div>
+
+        </div>
+        <% end %>
+      </div>
+
+
     </div>
   </div>
 </div>

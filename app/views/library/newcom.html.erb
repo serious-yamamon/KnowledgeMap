@@ -1,0 +1,24 @@
+<div class="main comment-new">
+    <div class="comtainer">
+        <h1 class="form-heading">新規コメント</h1>
+        <div class="library-show-item">
+          <div class="library-show-question">
+            <p>
+              <%= @quiz.ques_s %>
+            </p>
+          </div>
+          <div class="library-show-answer">
+            <%= @quiz.answer %>
+          </div>
+
+        </div>
+        <%= form_tag("/library/#{@quiz.id}/createcom") do %>
+        <div class="form">
+            <div class="form-body">
+                <textarea name="comment"></textarea>
+                <input type="submit" value="投稿">
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
