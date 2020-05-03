@@ -1,9 +1,8 @@
 <div class="main library-show">
-
-  <div class="container">
-    <div class="side-list">
-      <ul>
-        <div class="select-list">
+  <div class="menu">
+      <div class="menu-list menu-list-body">
+        <p>問題集</p>
+        <ul>
           <% @list_names.zip(@list_id) do |list_name,list_id| %>
           <%= link_to(list_name.list_name,"/library/index/#{list_id.list_id}") %>
           <% end %>
@@ -11,19 +10,25 @@
           <%= link_to("「あとで確認する」問題リスト","/library/check") %>
           <%= link_to("誤答問題リスト","/library/incorr") %>
           <%= link_to("未修問題リスト","/library/unlearn") %>
-      </ul>
-    </div>
+          <%= link_to("すべて表示","/library") %>
+        </ul>
+      </div>
+  </div>
 
-    <div class="prev-btn">
-      <% if params[:id] != "1" %>
-      <%= link_to("前へ","/library/#{@id.to_i - 1}") %>
-      <% else %>
-      <%= link_to("前へ","") %>
-      <% end %>
-    </div>
+  <div class="container">
+    <div class="prevnext-wrapper">
+      <div class="prev-btn library-menus">
+        <% if params[:id] != "1" %>
+        <%= link_to("前へ","/library/#{@id.to_i - 1}") %>
+        <% else %>
+        <%= link_to("前へ","") %>
+        <% end %>
+      </div>
 
-    <div class="next-btn">
-      <%= link_to("次へ","/library/#{@id.to_i + 1}") %>
+      <div class="next-btn library-menus">
+        <%= link_to("次へ","/library/#{@id.to_i + 1}") %>
+      </div>
+
     </div>
 
     <div class="library-show-item">
@@ -45,34 +50,40 @@
     </div>
 
     <div class="comment-item">
-      <p>コメント</p>
-      <div class="comment-new-btn">
-          <%= link_to("新規コメント", "/library/#{@quiz.id}/newcom") %>
+      <div class="comment-show-item show-head">
+        <p>コメント</p>
+        <div class="library-menus">
+            <%= link_to("新規コメント投稿", "/library/#{@quiz.id}/newcom") %>
+        </div>
       </div>
       <% @comments.each do |comment| %>
       <div class="comment-show-item">
         <%= comment.comment %>
-      </div>
-      <div class="comment-menus">
-          <%= link_to("削除", "/library/#{comment.q_id}/#{comment.id}/delcom", {method: "post"}) %>
+        <div class="library-menus">
+            <%= link_to("削除", "/library/#{comment.q_id}/#{comment.id}/delcom", {method: "post"}) %>
+        </div>
+
       </div>
       <% end %>
-
+    </div>
 
       <div class="img-item">
-        <p>関連画像</p>
-        <div class="img-new-btn">
-          <%= form_tag("/library/#{@quiz.id}/newimg", {multipart: true}) do %>
-            <input name="image" type="file">
-            <input type="submit" value="投稿">
-          <% end %>
+        <div class="img-show-item show-head">
+          <p>関連画像</p>
+          <div class="library-menus">
+            <%= form_tag("/library/#{@quiz.id}/newimg", {multipart: true}) do %>
+              <input name="image" type="file">
+              <input type="submit" value="投稿">
+            <% end %>
+          </div>
         </div>
         <% @images.each do |image| %>
         <div class="img-show-item">
           <img src="<%= "/ref_images/#{image.image_name}" %>" >
-        </div>
-        <div class="img-menus">
-            <%= link_to("削除", "/library/#{image.q_id}/#{image.id}/delimg", {method: "post"}) %>
+          <div class="library-menus">
+              <%= link_to("削除", "/library/#{image.q_id}/#{image.id}/delimg", {method: "post"}) %>
+          </div>
+
         </div>
         <% end %>
       </div>
@@ -80,16 +91,18 @@
 
 
       <div class="ref-item">
-        <p>関連問題</p>
-        <div class="ref-new-btn">
-          <%= link_to("関連問題追加", "/library/#{@quiz.id}/newref") %>
+        <div class="library-show-item show-head">
+          <p>関連問題</p>
+          <div class="library-menus">
+            <%= link_to("関連問題追加", "/library/#{@quiz.id}/newref") %>
+          </div>
         </div>
         <% @reffers.each do |reffer| %>
         <div class="library-show-item">
 
           <div class="library-show-question">
             <% refquiz = Database.find_by(id: reffer.d_id) %>
-            <%= refquiz.ques_s %>
+            <%= link_to(refquiz.ques_s,"/library/#{refquiz.id}") %>
           </div>
           <div class="library-show-answer">
             <%= refquiz.answer  %>
@@ -103,6 +116,6 @@
       </div>
 
 
-    </div>
+
   </div>
 </div>

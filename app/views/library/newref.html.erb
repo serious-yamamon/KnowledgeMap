@@ -1,14 +1,24 @@
-<div class="main comment-new">
-    <div class="comtainer">
-        <p>検索</p>
-        <%= form_tag("/library/#{@id}/newref", :method => "get") do %>
-          <textarea name="search"></textarea>
-          <input type="submit" value="検索">
-        <% end %>
+<div class="main refference-new">
+    <div class="container">
+      <div class="form">
+        <div class="form-body">
+          <p>検索</p>
+          <%= form_tag("/library/#{@id}/newref", :method => "get") do %>
+            <input name="search">
+            <input type="submit" value="検索">
+          <% end %>
+        </div>
+      </div>
 
-        <% @quizes.each do |quiz| %>
+      <% @quizes.each do |quiz| %>
+      <div class="library-index-item">
+        <div class="question-item">
           <%= link_to(quiz.ques_s,"/library/#{@id}/#{quiz.id}/addref",{method: "post"}) %>
+        </div>
+        <div class="answer-item">
           <%= quiz.answer %>
-        <% end %>
+        </div>
+      </div>
+      <% end %>
     </div>
 </div>

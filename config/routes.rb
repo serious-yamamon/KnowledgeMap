@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get 'library/check' => 'library#check'
   get 'library/incorr' => 'library#incorr'
   get 'library/unlearn' => 'library#unlearn'
-  get 'library/all' => 'library#all'
   get 'library/index/:id' => 'library#index'
   get 'library/:id' => 'library#show'
   get 'library/:id/edit' => 'library#edit'

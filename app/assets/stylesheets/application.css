@@ -15,9 +15,10 @@
  */
  header {
     height: 64px;
-    position: absolute;
     z-index: 1;
     width: 100%;
+    position: fixed;
+    background-color: #64B159;
   }
 
   .header-logo {

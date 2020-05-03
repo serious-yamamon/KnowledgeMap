@@ -1,8 +1,7 @@
 class LibraryController < ApplicationController
   def index
-    @list_id = params[:id]
-    @list_name = Database.find_by(list_id: params[:id])
-
+    @list_names = Database.select(:list_name).distinct
+    @list_id = Database.select(:list_id).distinct
     @quizes = Database.where(list_id: params[:id])
 
 
@@ -108,6 +107,8 @@ class LibraryController < ApplicationController
   end
 
   def all
+    @list_names = Database.select(:list_name).distinct
+    @list_id = Database.select(:list_id).distinct
     @quizes = Database.search(params[:search])
   end
 

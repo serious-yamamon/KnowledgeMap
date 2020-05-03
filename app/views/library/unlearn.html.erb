@@ -1,8 +1,29 @@
-
-
 <div class="main library-index">
+  <div class="menu">
+      <div class="menu-list menu-list-body">
+        <p>問題集</p>
+        <ul>
+          <% @list_names.zip(@list_id) do |list_name,list_id| %>
+          <%= link_to(list_name.list_name,"/library/index/#{list_id.list_id}") %>
+          <% end %>
+          <%= link_to("お気に入り問題リスト","/library/fav") %>
+          <%= link_to("「あとで確認する」問題リスト","/library/check") %>
+          <%= link_to("誤答問題リスト","/library/incorr") %>
+          <%= link_to("未修問題リスト","/library/unlearn") %>
+          <%= link_to("すべて表示","/library") %>
+        </ul>
+      </div>
+
+    <div class="menu-body">
+      <p>検索</p>
+      <%= form_tag("/library", :method => "get") do %>
+        <input name="search">
+        <input type="submit" value="検索">
+      <% end %>
+    </div>
+  </div>
+
   <div class="container">
-    <%= link_to("未習問題リスト","/library/select") %>
 
     <% @quizes.each do |quiz|%>
     <div class="library-index-item">
