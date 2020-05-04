@@ -79,6 +79,7 @@ body {
   background-repeat: no-repeat;
   background-position: center 50%;
   background-size: cover;
+  background-image: url("/top.jpg");
 }
 
 .top-message {
@@ -146,8 +147,15 @@ body {
   font-size: 20px;
 }
 
+.container-about{
+  width: 60%;
+  float: left;
+
+}
 .about-img {
-  width: 84%;
+  width: 40%;
+  float: right;
+
 }
 
 .about-main a{

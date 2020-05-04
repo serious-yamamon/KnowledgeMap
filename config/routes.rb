@@ -2,8 +2,9 @@ Rails.application.routes.draw do
   get 'flashcard/select' => 'flashcard#select'
 
 
-  get 'library' => 'library#all'
+  get 'library' => 'library#select'
   get 'library/select' => 'library#select'
+  get 'library/all' => 'library#all'
   get 'library/fav' => 'library#fav'
   get 'library/check' => 'library#check'
   get 'library/incorr' => 'library#incorr'

@@ -83,9 +83,39 @@
 .library-show-answer{
   font-size: 20px;
   text-align: right;
+  width: 60%;
+  float: right;
+}
+
+.ref-show-answer{
+  font-size: 20px;
+  text-align: right;
+
 
 }
 
+.disp-box label {
+    display: inline-block;
+    color: #ffffff;                   /* ボタンの文字色 */
+    background-color: #64B159;        /* ボタンの背景色 */
+    padding: 0.5em 1em;               /* ボタン内側の余白 */
+    border-radius: 2px;               /* 角丸 */
+    cursor: pointer;                  /* ボタンにカーソルを合わせた時に指アイコンを表示 */
+}
+
+.disp-box input {
+    display: none; /* 非表示 */
+}
+
+.disp-box .text {
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.1;
+}
+
+.disp-box input:checked ~ .text{
+  opacity: 1;
+}
 
 
 .comment-item{
@@ -113,6 +143,10 @@
 
 .img-item{
   padding-top: 10px;
+}
+
+.show-img{
+  width: 100%;
 }
 
 .img-show-item{
