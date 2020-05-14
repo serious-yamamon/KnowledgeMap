@@ -28,13 +28,16 @@
         <% @quizes.each do |quiz| %>
         <div class="library-index-item">
           <div class="question-item">
-            <%= link_to(quiz.ques_s,"library/#{quiz.id}") %>
+            <%= link_to(quiz.ques_s,"/library/#{quiz.id}") %>
           </div>
           <div class="answer-item">
             <%= link_to(quiz.answer,"") %>
           </div>
         </div>
         <% end %>
+        <div class="pagenation">
+          <%= paginate @quizes %>
+        </div>
 
   </div>
 </div>

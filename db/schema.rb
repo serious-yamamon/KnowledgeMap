@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_01_104542) do
+ActiveRecord::Schema.define(version: 2020_05_14_151358) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment"
@@ -33,8 +33,22 @@ ActiveRecord::Schema.define(version: 2020_05_01_104542) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "favs", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "q_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "images", force: :cascade do |t|
     t.string "image_name"
+    t.integer "q_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "mylists", force: :cascade do |t|
+    t.integer "user_id"
     t.integer "q_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -43,6 +57,22 @@ ActiveRecord::Schema.define(version: 2020_05_01_104542) do
   create_table "refferences", force: :cascade do |t|
     t.integer "o_id"
     t.integer "d_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "q_id"
+    t.boolean "correct"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "user_name"
+    t.string "name"
+    t.string "pass"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

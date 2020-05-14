@@ -1,47 +1,56 @@
 class LibraryController < ApplicationController
   def index
-    @list_names = Database.select(:list_name).distinct
-    @list_id = Database.select(:list_id).distinct
-    @quizes = Database.where(list_id: params[:id])
+    @list = Database.select(:list_name,:list_id).distinct
+    @list_names = @list.order(:list_id)
+    @list_id = @list.order(:list_id)
+    @quizes = Database.where(list_id: params[:id]).page(params[:page])
 
 
   end
 
   def fav
-    @list_names = Database.select(:list_name).distinct
-    @list_id = Database.select(:list_id).distinct
-    @quizes = Database.where(fav: true)
+    @list = Database.select(:list_name,:list_id).distinct
+    @list_names = @list.order(:list_id)
+    @list_id = @list.order(:list_id)
+    @quizes = Database.where(fav: true).page(params[:page])
   end
 
   def check
-    @list_names = Database.select(:list_name).distinct
-    @list_id = Database.select(:list_id).distinct
-    @quizes = Database.where(check: true)
+    @list = Database.select(:list_name,:list_id).distinct
+    @list_names = @list.order(:list_id)
+    @list_id = @list.order(:list_id)
+    @quizes = Database.where(check: true).page(params[:page])
   end
 
   def incorr
-    @list_names = Database.select(:list_name).distinct
-    @list_id = Database.select(:list_id).distinct
-    @quizes = Database.where(incorrect: true)
+    @list = Database.select(:list_name,:list_id).distinct
+    @list_names = @list.order(:list_id)
+    @list_id = @list.order(:list_id)
+    @quizes = Database.where(incorrect: true).page(params[:page])
   end
 
   def unlearn
-    @list_names = Database.select(:list_name).distinct
-    @list_id = Database.select(:list_id).distinct
-    @quizes = Database.where(correct: false).where(incorrect: false)
+    @list = Database.select(:list_name,:list_id).distinct
+    @list_names = @list.order(:list_id)
+    @list_id = @list.order(:list_id)
+    @quizes = Database.where(correct: false).where(incorrect: false).page(params[:page])
   end
 
 
   def select
-    @list_names = Database.select(:list_name).distinct
-    @list_id = Database.select(:list_id).distinct
+    @list = Database.select(:list_name,:list_id).distinct
+    @list_names = @list.order(:list_id)
+    @list_id = @list.order(:list_id)
+    @quizes = Database.search(params[:search]).page(params[:page])
+
 
   end
 
   def show
     @id = params[:id]
-    @list_names = Database.select(:list_name).distinct
-    @list_id = Database.select(:list_id).distinct
+    @list = Database.select(:list_name,:list_id).distinct
+    @list_names = @list.order(:list_id)
+    @list_id = @list.order(:list_id)
     @quiz = Database.find_by(id: params[:id])
     @comments = Comment.where(q_id: params[:id])
     @images = Image.where(q_id: params[:id])
@@ -103,13 +112,14 @@ class LibraryController < ApplicationController
 
   def newref
     @id = params[:id]
-    @quizes = Database.search(params[:search])
+    @quizes = Database.search(params[:search]).page(params[:page])
   end
 
   def all
-    @list_names = Database.select(:list_name).distinct
-    @list_id = Database.select(:list_id).distinct
-    @quizes = Database.search(params[:search])
+    @list = Database.select(:list_name,:list_id).distinct
+    @list_names = @list.order(:list_id)
+    @list_id = @list.order(:list_id)
+    @quizes = Database.search(params[:search]).page(params[:page])
   end
 
   def addref
