@@ -4,7 +4,12 @@
     <h2>インプットをより効率的に</h2>
     <p>この情報に溢れる社会で，より多くの情報をインプットしたいあなたへ</p>
     <div class="btn-wrapper">
+      <% if @current_user %>
       <a href="/mode" class="btn" >さっそく始める</a>
+      <% else %>
+      <a href="/login" class="btn" >ログイン</a>
+      <% end %>
+
     </div?
   </div>
 </div>

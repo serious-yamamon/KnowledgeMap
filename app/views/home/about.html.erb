@@ -8,7 +8,11 @@
     <p>脳内にストックされた知識にほかなりません．</p>
     <p>より効率よく，知識を導入・整理したいあなたへ．</p>
     <div class="btn-wrapper">
-      <a href="/mode" class="about-btn">さっそく始める</a>
+      <% if @current_user %>
+      <a href="/mode" class="btn" >さっそく始める</a>
+      <% else %>
+      <a href="/login" class="btn" >ログイン</a>
+      <% end %>
     </div>
   </div>
 

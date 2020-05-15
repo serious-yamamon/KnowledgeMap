@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  post 'mylist/:q_id/create' => 'mylist#create'
+  post 'mylist/:q_id/destroy' => 'mylist#destroy'
+
+  post 'fav/:q_id/create' => 'fav#create'
+  post 'fav/:q_id/destroy' => 'fav#destroy'
+
+  get 'login' => 'users#login_form'
+  post 'login' => 'users#login'
+  post 'logout' => 'users#logout'
+
+
+  post 'users/:id/update' => 'users#update'
+  get 'users/:id/edit' => 'users#edit'
+  post 'users/create' => 'users#create'
+  get 'users/:id' => 'users#show'
+  get 'signup' => 'users#signup'
   get 'flashcard/select' => 'flashcard#select'
 
 

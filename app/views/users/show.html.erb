@@ -1,0 +1,21 @@
+<div class="main user-show">
+  <div class="container">
+    <div class="user">
+      <h2><%= @user.name %></h2>
+      <p><%= @user.user_name %></p>
+      <% if @user.id == @current_user.id %>
+        <%= link_to("編集", "/users/#{@user.id}/edit") %>
+      <% end %>
+    </div>
+
+    <% @user.comments.each do |comment| %>
+    <div class="library-index-item">
+      <%= link_to(comment.database.ques_s,"/library/#{comment.q_id}") %>
+      <div class="mini-comment">
+        <%= comment.comment %>
+      </div>
+    </div>
+  </div>
+<% end %>
+  </div>
+</div>

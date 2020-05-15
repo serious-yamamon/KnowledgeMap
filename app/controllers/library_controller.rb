@@ -1,4 +1,6 @@
 class LibraryController < ApplicationController
+  before_action :authenticate_user
+
   def index
     @list = Database.select(:list_name,:list_id).distinct
     @list_names = @list.order(:list_id)
@@ -12,14 +14,15 @@ class LibraryController < ApplicationController
     @list = Database.select(:list_name,:list_id).distinct
     @list_names = @list.order(:list_id)
     @list_id = @list.order(:list_id)
-    @quizes = Database.where(fav: true).page(params[:page])
+    @favs = Fav.where(user_id: @current_user.id).page(params[:page])
+
   end
 
   def check
     @list = Database.select(:list_name,:list_id).distinct
     @list_names = @list.order(:list_id)
     @list_id = @list.order(:list_id)
-    @quizes = Database.where(check: true).page(params[:page])
+    @mylists = Mylist.where(user_id: @current_user.id).page(params[:page])
   end
 
   def incorr
@@ -78,7 +81,7 @@ class LibraryController < ApplicationController
   end
 
   def createcom
-    @comments = Comment.new(comment: params[:comment], q_id: params[:id] )
+    @comments = Comment.new(comment: params[:comment], q_id: params[:id], user_id: @current_user.id)
     @comments.save
 
     redirect_to("/library/#{params[:id]}")
