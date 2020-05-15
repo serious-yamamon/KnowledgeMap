@@ -5,7 +5,7 @@ class LibraryController < ApplicationController
     @list = Database.select(:list_name,:list_id).distinct
     @list_names = @list.order(:list_id)
     @list_id = @list.order(:list_id)
-    @quizes = Database.where(list_id: params[:id]).page(params[:page])
+    @quizes = Database.where(list_id: params[:id]).order(id: "ASC").page(params[:page])
 
 
   end

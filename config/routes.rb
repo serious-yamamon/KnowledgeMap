@@ -22,7 +22,8 @@ Rails.application.routes.draw do
   post 'users/create' => 'users#create'
   get 'users/:id' => 'users#show'
   get 'signup' => 'users#signup'
-  get 'flashcard/select' => 'flashcard#select'
+
+  get 'flashcard' => 'flashcard#select'
 
 
   get 'library' => 'library#select'
@@ -44,7 +45,6 @@ Rails.application.routes.draw do
   get 'library/:id/newref' => 'library#newref'
   get 'library/search' => 'library#search'
   post 'library/:o_id/:d_id/addref' => 'library#addref'
-
   post 'library/:o_id/:d_id/delref' => 'library#delref'
 
   get '/' => 'home#top'

@@ -20,7 +20,8 @@
       <li>
         <%= link_to("KnowledgeMapとは","/about")  %>
         <%= link_to("開発者ブログへ","https://blog.yamamon-so.com/")  %>
-        <%= link_to("新規登録", "/signup") %>
+        <%= link_to("ライブラリモード","/library")  %>
+        <%= link_to("テストモード","/flashcard")  %>        
         <%= link_to("マイページ", "/users/#{@current_user.id}") %>
         <%= link_to("ログアウト", "/logout",{method: :post}) %>
       </li>
