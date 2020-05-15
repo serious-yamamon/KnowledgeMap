@@ -24,18 +24,18 @@
   </div>
   <div class="container">
 
-    <% @quizes.each do |quiz|%>
+    <% @incorrects.each do |incorrect|%>
     <div class="library-index-item">
       <div class="question-item">
-        <%= link_to(quiz.ques_s,"/library/#{quiz.id}") %>
+        <%= link_to(incorrect.database.ques_s,"/library/#{incorrect.q_id}") %>
       </div>
       <div class="answer-item">
-        <%= link_to(quiz.answer,"/library/#{quiz.id}") %>
+        <%= link_to(incorrect.database.answer,"/library/#{incorrect.q_id}") %>
       </div>
     </div>
     <% end %>
     <div class="pagenation">
-      <%= paginate @quizes %>
+      <%= paginate @incorrects %>
     </div>
 
   </div>

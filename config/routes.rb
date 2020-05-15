@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  post 'status/:q_id/createcircle' => 'status#createcircle'
+  post 'status/:q_id/createcross' => 'status#createcross'
+  post 'status/:q_id/destroy' => 'status#destroy'
+  post 'status/:q_id/updatecircle' => 'status#updatecircle'
+  post 'status/:q_id/updatecross' => 'status#updatecross'
+
+
   post 'mylist/:q_id/create' => 'mylist#create'
   post 'mylist/:q_id/destroy' => 'mylist#destroy'
 

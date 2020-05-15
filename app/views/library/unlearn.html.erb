@@ -26,6 +26,9 @@
   <div class="container">
 
     <% @quizes.each do |quiz|%>
+    <% if @learns.find_by(q_id: quiz.id)%>
+    <% next %>
+    <% end %>
     <div class="library-index-item">
       <div class="question-item">
         <%= link_to(quiz.ques_s,"/library/#{quiz.id}") %>

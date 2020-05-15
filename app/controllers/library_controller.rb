@@ -29,15 +29,16 @@ class LibraryController < ApplicationController
     @list = Database.select(:list_name,:list_id).distinct
     @list_names = @list.order(:list_id)
     @list_id = @list.order(:list_id)
-    @quizes = Database.where(incorrect: true).page(params[:page])
+    @incorrects = Status.where(correct: false).page(params[:page])
   end
 
   def unlearn
     @list = Database.select(:list_name,:list_id).distinct
     @list_names = @list.order(:list_id)
     @list_id = @list.order(:list_id)
-    @quizes = Database.where(correct: false).where(incorrect: false).page(params[:page])
-  end
+    @quizes = Database.all.page(params[:page])
+    @learns = Status.where(user_id: @current_user.id)
+    end
 
 
   def select

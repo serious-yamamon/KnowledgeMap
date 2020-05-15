@@ -53,27 +53,51 @@
       </div>
 
       <% if Fav.find_by(user_id: @current_user.id, q_id: @quiz.id) %>
-      <%= link_to("/fav/#{@quiz.id}/destroy",{method: "post"}) do %>
-        <span class="fas fa-heart like-btn-unlike"></span>
-      <% end %>
+        <%= link_to("/fav/#{@quiz.id}/destroy",{method: "post"}) do %>
+          <span class="fas fa-heart like-btn-unlike"></span>
+        <% end %>
       <% else %>
-      <%= link_to("/fav/#{@quiz.id}/create", {method: "post"}) do %>
-        <span class="fas fa-heart like-btn"></span>
-      <% end %>
+        <%= link_to("/fav/#{@quiz.id}/create", {method: "post"}) do %>
+          <span class="fas fa-heart like-btn"></span>
+        <% end %>
       <% end %>
 
       <% if Mylist.find_by(user_id: @current_user.id, q_id: @quiz.id) %>
-      <%= link_to("/mylist/#{@quiz.id}/destroy",{method: "post"}) do %>
-        <span class="fas fa-folder-plus mylist-btn-unlike"></span>
-      <% end %>
+        <%= link_to("/mylist/#{@quiz.id}/destroy",{method: "post"}) do %>
+          <span class="fas fa-folder-plus mylist-btn-unlike"></span>
+        <% end %>
       <% else %>
-      <%= link_to("/mylist/#{@quiz.id}/create", {method: "post"}) do %>
-        <span class="fas fa-folder-plus mylist-btn"></span>
+        <%= link_to("/mylist/#{@quiz.id}/create", {method: "post"}) do %>
+          <span class="fas fa-folder-plus mylist-btn"></span>
+        <% end %>
       <% end %>
+
+      <% if Status.find_by(user_id: @current_user.id, q_id: @quiz.id) %>
+        <% status1 = Status.find_by(user_id: @current_user.id, q_id: @quiz.id) %>
+        <% if status1.correct %>
+          <%= link_to("/status/#{@quiz.id}/destroy",{method: "post"}) do %>
+            <span class="far fa-circle circle-btn-unlike"></span>
+          <% end %>
+          <%= link_to("/status/#{@quiz.id}/updatecross",{method: "post"}) do %>
+            <span class="fas fa-times cross-btn"></span>
+          <% end %>
+        <% else %>
+          <%= link_to("/status/#{@quiz.id}/updatecircle",{method: "post"}) do %>
+            <span class="far fa-circle circle-btn"></span>
+          <% end %>
+          <%= link_to("/status/#{@quiz.id}/destroy",{method: "post"}) do %>
+            <span class="fas fa-times cross-btn-unlike"></span>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= link_to("/status/#{@quiz.id}/createcircle", {method: "post"}) do %>
+          <span class="far fa-circle circle-btn"></span>
+        <% end %>
+        <%= link_to("/status/#{@quiz.id}/createcross", {method: "post"}) do %>
+          <span class="fas fa-times cross-btn"></span>
+        <% end %>
       <% end %>
-      
-      <i class="far fa-circle"></i>
-      <i class="fas fa-times"></i>
+
 
       <div class="library-menus">
         <%= link_to("編集", "/library/#{@quiz.id}/edit") %>
@@ -89,7 +113,7 @@
       </div>
       <% @comments.each do |comment| %>
       <div class="comment-show-item">
-        <%= comment.comment %>
+        <%= simple_format(comment.comment) %>
         <div class="library-user-name">
           <%= link_to(comment.user.name,"/users/#{comment.user.id}") %>
         </div>
