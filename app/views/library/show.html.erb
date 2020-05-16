@@ -14,23 +14,19 @@
         </ul>
       </div>
   </div>
-
   <div class="container">
     <div class="prevnext-wrapper">
       <div class="prev-btn library-menus">
         <% if params[:id] != "1" %>
-        <%= link_to("前へ","/library/#{@id.to_i - 1}") %>
+          <%= link_to("前へ","/library/#{@id.to_i - 1}") %>
         <% else %>
-        <%= link_to("前へ","") %>
+          <%= link_to("前へ","") %>
         <% end %>
       </div>
-
       <div class="next-btn library-menus">
         <%= link_to("次へ","/library/#{@id.to_i + 1}") %>
       </div>
-
     </div>
-
     <div class="library-show-item">
       <div class="qustion-info">
         <%= @quiz.list_name %>
@@ -41,145 +37,128 @@
           <%= @quiz.ques_s %>
         </p>
       </div>
-
       <div class="disp-box">
-        <label for="disp-btn">答え表示切替</label>
+        <label for="disp-btn">
+          答え表示切替
+        </label>
         <input type="checkbox" id="disp-btn">
-
         <div class="library-show-answer text">
           <%= @quiz.answer %>
         </div>
-
       </div>
-
       <% if Fav.find_by(user_id: @current_user.id, q_id: @quiz.id) %>
         <%= link_to("/fav/#{@quiz.id}/destroy",{method: "post"}) do %>
-          <span class="fas fa-heart like-btn-unlike"></span>
+          <span class="fas fa-heart like-btn-unlike btn-show-status"></span>
         <% end %>
       <% else %>
         <%= link_to("/fav/#{@quiz.id}/create", {method: "post"}) do %>
-          <span class="fas fa-heart like-btn"></span>
+          <span class="fas fa-heart like-btn btn-show-status"></span>
         <% end %>
       <% end %>
-
       <% if Mylist.find_by(user_id: @current_user.id, q_id: @quiz.id) %>
         <%= link_to("/mylist/#{@quiz.id}/destroy",{method: "post"}) do %>
-          <span class="fas fa-folder-plus mylist-btn-unlike"></span>
+          <span class="fas fa-folder-plus mylist-btn-unlike btn-show-status"></span>
         <% end %>
       <% else %>
         <%= link_to("/mylist/#{@quiz.id}/create", {method: "post"}) do %>
-          <span class="fas fa-folder-plus mylist-btn"></span>
+          <span class="fas fa-folder-plus mylist-btn btn-show-status"></span>
         <% end %>
       <% end %>
-
       <% if Status.find_by(user_id: @current_user.id, q_id: @quiz.id) %>
         <% status1 = Status.find_by(user_id: @current_user.id, q_id: @quiz.id) %>
         <% if status1.correct %>
           <%= link_to("/status/#{@quiz.id}/destroy",{method: "post"}) do %>
-            <span class="far fa-circle circle-btn-unlike"></span>
+            <span class="far fa-circle circle-btn-unlike btn-show-status"></span>
           <% end %>
           <%= link_to("/status/#{@quiz.id}/updatecross",{method: "post"}) do %>
-            <span class="fas fa-times cross-btn"></span>
+            <span class="fas fa-times cross-btn btn-show-status"></span>
           <% end %>
         <% else %>
           <%= link_to("/status/#{@quiz.id}/updatecircle",{method: "post"}) do %>
-            <span class="far fa-circle circle-btn"></span>
+            <span class="far fa-circle circle-btn btn-show-status"></span>
           <% end %>
           <%= link_to("/status/#{@quiz.id}/destroy",{method: "post"}) do %>
-            <span class="fas fa-times cross-btn-unlike"></span>
+            <span class="fas fa-times cross-btn-unlike btn-show-status"></span>
           <% end %>
         <% end %>
       <% else %>
         <%= link_to("/status/#{@quiz.id}/createcircle", {method: "post"}) do %>
-          <span class="far fa-circle circle-btn"></span>
+          <span class="far fa-circle circle-btn btn-show-status"></span>
         <% end %>
         <%= link_to("/status/#{@quiz.id}/createcross", {method: "post"}) do %>
-          <span class="fas fa-times cross-btn"></span>
+          <span class="fas fa-times cross-btn btn-show-status"></span>
         <% end %>
       <% end %>
-
-
       <div class="library-menus">
         <%= link_to("編集", "/library/#{@quiz.id}/edit") %>
       </div>
     </div>
-
     <div class="comment-item">
       <div class="comment-show-item show-head">
-        <p>コメント</p>
+          コメント
         <div class="library-menus">
-            <%= link_to("/library/#{@quiz.id}/newcom") do %>
+          <%= link_to("/library/#{@quiz.id}/newcom") do %>
             <span class="far fa-plus-square"></span>
-            <% end %>
+          <% end %>
         </div>
       </div>
       <% @comments.each do |comment| %>
-      <div class="comment-show-item">
-        <%= simple_format(comment.comment) %>
-        <div class="library-user-name">
-          <%= link_to(comment.user.name,"/users/#{comment.user.id}") %>
+        <div class="comment-show-item">
+          <div class="library-user-name">
+            <%= link_to(comment.user.name,"/users/#{comment.user.id}") %>
+          </div>
+          <%= simple_format(comment.comment) %>
+          <% if comment.user_id == @current_user.id %>
+            <div class="library-menus">
+              <%= link_to("編集", "/library/#{comment.id}/editcom") %>
+              <%= link_to("削除", "/library//#{comment.id}/delcom", {method: "post"}) %>
+            </div>
+          <% end %>
         </div>
-        <% if comment.user_id == @current_user.id %>
-        <div class="library-menus">
-            <%= link_to("編集", "/library/#{comment.id}/editcom") %>
-            <%= link_to("削除", "/library//#{comment.id}/delcom", {method: "post"}) %>
-        </div>
-        <% end %>
-      </div>
       <% end %>
     </div>
-
-      <div class="img-item">
-        <div class="img-show-item show-head">
-          <p>関連画像</p>
-          <div class="library-menus">
-            <%= form_tag("/library/#{@quiz.id}/newimg", {multipart: true}) do %>
-              <input name="image" type="file">
-              <input type="submit" value="投稿">
-            <% end %>
-          </div>
+    <div class="img-item">
+      <div class="img-show-item show-head">
+          関連画像
+        <div class="library-menus">
+          <%= form_tag("/library/#{@quiz.id}/newimg", {multipart: true}) do %>
+            <input name="image" type="file">
+            <input type="submit" value="投稿">
+          <% end %>
         </div>
-        <% @images.each do |image| %>
+      </div>
+      <% @images.each do |image| %>
         <div class="img-show-item">
           <img class="show-img" src="<%= "/ref_images/#{image.image_name}" %>" >
           <div class="library-menus">
-              <%= link_to("削除", "/library/#{image.q_id}/#{image.id}/delimg", {method: "post"}) %>
+            <%= link_to("削除", "/library/#{image.q_id}/#{image.id}/delimg", {method: "post"}) %>
           </div>
-
         </div>
-        <% end %>
-      </div>
-
-
-
-      <div class="ref-item">
-        <div class="library-show-item show-head">
-          <p>関連問題</p>
-          <div class="library-menus">
-            <%= link_to( "/library/#{@quiz.id}/newref") do %>
+      <% end %>
+    </div>
+    <div class="ref-item">
+      <div class="library-show-item show-head">
+          関連問題
+        <div class="library-menus">
+          <%= link_to( "/library/#{@quiz.id}/newref") do %>
             <span class="far fa-plus-square"></span>
-            <% end %>
-          </div>
+          <% end %>
         </div>
-        <% @reffers.each do |reffer| %>
+      </div>
+      <% @reffers.each do |reffer| %>
         <div class="library-show-item">
-
           <div class="library-show-question">
             <% refquiz = Database.find_by(id: reffer.d_id) %>
             <%= link_to(refquiz.ques_s,"/library/#{refquiz.id}") %>
           </div>
           <div class="ref-show-answer">
-            <%= refquiz.answer  %>
+            <%= refquiz.answer %>
           </div>
           <div class="library-menus">
             <%= link_to("削除", "/library/#{@quiz.id}/#{refquiz.id}/delref", {method: "post"} ) %>
           </div>
-
         </div>
-        <% end %>
-      </div>
-
-
-
+      <% end %>
+    </div>
   </div>
 </div>

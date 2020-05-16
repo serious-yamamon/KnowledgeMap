@@ -1,24 +1,29 @@
 <div class="main users-edit">
   <div class="container">
-    <div class="form-heading">ユーザー情報の編集</div>
+    <div class="form-heading">
+      ユーザー情報の編集
+    </div>
     <div class="form users-form">
       <div class="form-body">
-
         <% @user.errors.full_messages.each do |message| %>
-        <div class="form-error">
-          <%= message %>
-        </div>
+          <div class="form-error">
+            <%= message %>
+          </div>
         <% end %>
-
         <%= form_tag("/users/#{@user.id}/update") do %>
-        <p>ユーザー名</p>
-        <input name="user_name" value="<%= @user.user_name %>">
-        <p>表示名</p>
-        <input name="name" value="<%= @user.name %>">
-        <p>パスワード</p>
-        <input name="pass" value="<%= @user.pass %>">
-
-        <input type="submit" value="保存">
+          <p>
+            ユーザー名
+          </p>
+          <input name="user_name" value="<%= @user.user_name %>">
+          <p>
+            表示名
+          </p>
+          <input name="name" value="<%= @user.name %>">
+          <p>
+            パスワード
+          </p>
+          <input name="pass" value="<%= @user.pass %>">
+          <input type="submit" value="保存">
         <% end %>
       </div>
     </div>

@@ -79,14 +79,14 @@
           <span class="fas fa-times cross-btn"></span>
         <% end %>
       <% end %>
-
-      <i class="far fa-comment"></i>
-      <%= Comment.where(q_id: mylist.q_id).count %>
-      <i class="far fa-images"></i>
-      <%= Image.where(q_id: mylist.q_id).count %>
-      <i class="fas fa-link"></i>
-      <%= Refference.where(o_id: mylist.q_id).count %>
-
+      <div class="status-icon">
+        <i class="far fa-comment"></i>
+        <%= Comment.where(q_id: mylist.q_id).count %>
+        <i class="far fa-images"></i>
+        <%= Image.where(q_id: mylist.q_id).count %>
+        <i class="fas fa-link"></i>
+        <%= Refference.where(o_id: mylist.q_id).count %>
+      </div>
     </div>
     <% end %>
     <div class="pagenation">

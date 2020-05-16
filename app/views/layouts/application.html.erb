@@ -4,38 +4,35 @@
     <title>KnowledgeMap</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">  </head>
-
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  </head>
   <body>
     <header>
-    <div class="header-logo">
-      <%= link_to("KnowledgeMap","/")  %>
-    </div>
-    <ul class="header-menus">
-      <% if @current_user %>
-      <li>
-        <%= link_to("KnowledgeMapとは","/about")  %>
-        <%= link_to("開発者ブログへ","https://blog.yamamon-so.com/")  %>
-        <%= link_to("ライブラリモード","/library")  %>
-        <%= link_to("テストモード","/flashcard")  %>        
-        <%= link_to("マイページ", "/users/#{@current_user.id}") %>
-        <%= link_to("ログアウト", "/logout",{method: :post}) %>
-      </li>
-      <% else %>
-      <li>
-        <%= link_to("KnowledgeMapとは","/about")  %>
-        <%= link_to("開発者ブログへ","https://blog.yamamon-so.com/")  %>
-        <%= link_to("新規登録", "/signup") %>
-        <%= link_to("ログイン", "/login") %>
-      </li>
-      <% end %>
-
-    </ul>
-  </header>
+      <div class="header-logo">
+        <%= link_to("KnowledgeMap","/")  %>
+      </div>
+      <ul class="header-menus">
+        <% if @current_user %>
+          <li>
+            <%= link_to("KnowledgeMapとは","/about")  %>
+            <%= link_to("開発者ブログへ","https://blog.yamamon-so.com/")  %>
+            <%= link_to("ライブラリモード","/library")  %>
+            <%= link_to("テストモード","/flashcard")  %>
+            <%= link_to("マイページ", "/users/#{@current_user.id}") %>
+            <%= link_to("ログアウト", "/logout",{method: :post}) %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to("KnowledgeMapとは","/about")  %>
+            <%= link_to("開発者ブログへ","https://blog.yamamon-so.com/")  %>
+            <%= link_to("新規登録", "/signup") %>
+            <%= link_to("ログイン", "/login") %>
+          </li>
+        <% end %>
+      </ul>
+    </header>
     <%= yield %>
   </body>
 </html>
