@@ -444,19 +444,10 @@
 }
 
 @media (max-width: 1200px) {
-  .container{
+  .container-right{
     margin-right: 100px;
   }
 
-}
-
-@media (max-width: 1000px) {
-  .container{
-    margin-right: 20px;
-  }
-}
-
-@media (max-width: 920px) {
   *{
     box-sizing:border-box;
   }
@@ -465,12 +456,9 @@
     font-size: 62.5%;
   }
 
-  .header-menus {
-    display: none;
-  }
 
 
-  .container {
+  .container-right {
     max-width: 90%;
     padding-left: 15px;
     padding-right: 15px;
@@ -732,9 +720,7 @@
     clear: both;
   }
 
-  .menu {
-    display: none;
-  }
+
 
   .menu-heading {
     font-weight: 300;
