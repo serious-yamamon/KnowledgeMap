@@ -88,11 +88,23 @@ class LibraryController < ApplicationController
     redirect_to("/library/#{params[:id]}")
   end
 
+  def editcom
+    @comment = Comment.find_by(id: params[:id])
+  end
+
+  def updatecom
+    @comment = Comment.find_by(id: params[:id])
+    @comment.comment = params[:comment]
+    @comment.save
+
+    redirect_to("/library/#{@comment.q_id}")
+  end
+
   def delcom
     @comment = Comment.find_by(id: params[:id])
     @comment.destroy
 
-    redirect_to("/library/#{params[:q_id]}")
+    redirect_back(fallback_location: "/")
   end
 
   def newimg

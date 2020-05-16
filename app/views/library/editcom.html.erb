@@ -1,0 +1,15 @@
+<div class="main library-new">
+  <div class="container">
+    <p class="form-heading">コメントの編集</p>
+
+    <%= form_tag("/library/#{@comment.id}/updatecom") do %>
+      <div class="form">
+        <div class="form-body">
+          <textarea name="comment"><%= @comment.comment %></textarea>
+          <input type="submit" value="保存">
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

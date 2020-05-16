@@ -6,13 +6,13 @@ class FavController < ApplicationController
   def create
     @fav = Fav.new(user_id: @current_user.id, q_id: params[:q_id])
     @fav.save
-    redirect_to("/library/#{params[:q_id]}")
+    redirect_back(fallback_location: "/")
   end
 
   def destroy
     @fav = Fav.find_by(user_id: @current_user.id, q_id: params[:q_id])
     @fav.destroy
-    redirect_to("/library/#{params[:q_id]}")
+    redirect_back(fallback_location: "/")
   end
 
 end

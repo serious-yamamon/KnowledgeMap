@@ -32,7 +32,64 @@
       <div class="answer-item">
         <%= link_to(incorrect.database.answer,"/library/#{incorrect.q_id}") %>
       </div>
-    </div>
+
+
+
+                <% if Fav.find_by(user_id: @current_user.id, q_id: incorrect.q_id) %>
+                  <%= link_to("/fav/#{incorrect.q_id}/destroy",{method: "post"}) do %>
+                    <span class="fas fa-heart like-btn-unlike"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to("/fav/#{incorrect.q_id}/create", {method: "post"}) do %>
+                    <span class="fas fa-heart like-btn"></span>
+                  <% end %>
+                <% end %>
+
+                <% if Mylist.find_by(user_id: @current_user.id, q_id: incorrect.q_id) %>
+                  <%= link_to("/mylist/#{incorrect.q_id}/destroy",{method: "post"}) do %>
+                    <span class="fas fa-folder-plus mylist-btn-unlike"></span>
+                  <% end %>
+                <% else %>
+                  <%= link_to("/mylist/#{incorrect.q_id}/create", {method: "post"}) do %>
+                    <span class="fas fa-folder-plus mylist-btn"></span>
+                  <% end %>
+                <% end %>
+
+                <% if Status.find_by(user_id: @current_user.id, q_id: incorrect.q_id) %>
+                  <% status1 = Status.find_by(user_id: @current_user.id, q_id: incorrect.q_id) %>
+                  <% if status1.correct %>
+                    <%= link_to("/status/#{incorrect.q_id}/destroy",{method: "post"}) do %>
+                      <span class="far fa-circle circle-btn-unlike"></span>
+                    <% end %>
+                    <%= link_to("/status/#{incorrect.q_id}/updatecross",{method: "post"}) do %>
+                      <span class="fas fa-times cross-btn"></span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to("/status/#{incorrect.q_id}/updatecircle",{method: "post"}) do %>
+                      <span class="far fa-circle circle-btn"></span>
+                    <% end %>
+                    <%= link_to("/status/#{incorrect.q_id}/destroy",{method: "post"}) do %>
+                      <span class="fas fa-times cross-btn-unlike"></span>
+                    <% end %>
+                  <% end %>
+                <% else %>
+                  <%= link_to("/status/#{incorrect.q_id}/createcircle", {method: "post"}) do %>
+                    <span class="far fa-circle circle-btn"></span>
+                  <% end %>
+                  <%= link_to("/status/#{incorrect.q_id}/createcross", {method: "post"}) do %>
+                    <span class="fas fa-times cross-btn"></span>
+                  <% end %>
+                <% end %>
+
+                <i class="far fa-comment"></i>
+                <%= Comment.where(q_id: incorrect.q_id).count %>
+                <i class="far fa-images"></i>
+                <%= Image.where(q_id: incorrect.q_id).count %>
+                <i class="fas fa-link"></i>
+                <%= Refference.where(o_id: incorrect.q_id).count %>
+
+
+      </div>
     <% end %>
     <div class="pagenation">
       <%= paginate @incorrects %>

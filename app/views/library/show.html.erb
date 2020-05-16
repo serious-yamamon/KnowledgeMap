@@ -108,7 +108,9 @@
       <div class="comment-show-item show-head">
         <p>コメント</p>
         <div class="library-menus">
-            <%= link_to("新規コメント投稿", "/library/#{@quiz.id}/newcom") %>
+            <%= link_to("/library/#{@quiz.id}/newcom") do %>
+            <span class="far fa-plus-square"></span>
+            <% end %>
         </div>
       </div>
       <% @comments.each do |comment| %>
@@ -119,7 +121,8 @@
         </div>
         <% if comment.user_id == @current_user.id %>
         <div class="library-menus">
-            <%= link_to("削除", "/library/#{comment.q_id}/#{comment.id}/delcom", {method: "post"}) %>
+            <%= link_to("編集", "/library/#{comment.id}/editcom") %>
+            <%= link_to("削除", "/library//#{comment.id}/delcom", {method: "post"}) %>
         </div>
         <% end %>
       </div>
@@ -153,7 +156,9 @@
         <div class="library-show-item show-head">
           <p>関連問題</p>
           <div class="library-menus">
-            <%= link_to("関連問題追加", "/library/#{@quiz.id}/newref") %>
+            <%= link_to( "/library/#{@quiz.id}/newref") do %>
+            <span class="far fa-plus-square"></span>
+            <% end %>
           </div>
         </div>
         <% @reffers.each do |reffer| %>
