@@ -29,7 +29,7 @@ class LibraryController < ApplicationController
     @list = Database.select(:list_name,:list_id).distinct
     @list_names = @list.order(:list_id)
     @list_id = @list.order(:list_id)
-    @incorrects = Status.where(correct: false).page(params[:page])
+    @incorrects = Status.where(user_id: @current_user, correct: false).page(params[:page])
   end
 
   def unlearn
